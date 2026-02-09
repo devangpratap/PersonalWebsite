@@ -189,26 +189,44 @@ var PageTransitions = (function ($, options) {
         }
 
         if (goingDown) {
-            // Navigating down: randomly pick animation #3 or #7
-            if (Math.random() < 0.5) {
-                // #3: slide up/from bottom
+            // Navigating down: randomly pick from #3, #7, #11, #19
+            var downPick = Math.floor(Math.random() * 4);
+            if (downPick === 0) {
+                // #3: slide from bottom
                 inClass = 'pt-page-moveFromBottom';
                 outClass = 'pt-page-moveToTop';
-            } else {
+            } else if (downPick === 1) {
                 // #7: fade + slide from bottom
                 inClass = 'pt-page-moveFromBottom pt-page-ontop';
                 outClass = 'pt-page-fade';
+            } else if (downPick === 2) {
+                // #11: fade + slide bottom-to-top
+                inClass = 'pt-page-moveFromBottomFade';
+                outClass = 'pt-page-moveToTopFade';
+            } else {
+                // #19: shrink + slide from bottom
+                inClass = 'pt-page-moveFromBottom pt-page-ontop';
+                outClass = 'pt-page-scaleDown';
             }
         } else {
-            // Navigating up: randomly pick animation #4 or #8
-            if (Math.random() < 0.5) {
-                // #4: slide down/from top
+            // Navigating up: randomly pick from #4, #8, #12, #20
+            var upPick = Math.floor(Math.random() * 4);
+            if (upPick === 0) {
+                // #4: slide from top
                 inClass = 'pt-page-moveFromTop';
                 outClass = 'pt-page-moveToBottom';
-            } else {
+            } else if (upPick === 1) {
                 // #8: fade + slide from top
                 inClass = 'pt-page-moveFromTop pt-page-ontop';
                 outClass = 'pt-page-fade';
+            } else if (upPick === 2) {
+                // #12: fade + slide top-to-bottom
+                inClass = 'pt-page-moveFromTopFade';
+                outClass = 'pt-page-moveToBottomFade';
+            } else {
+                // #20: shrink + slide from top
+                inClass = 'pt-page-moveFromTop pt-page-ontop';
+                outClass = 'pt-page-scaleDown';
             }
         }
 
